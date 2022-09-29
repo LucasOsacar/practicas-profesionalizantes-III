@@ -1,0 +1,292 @@
+<!DOCTYPE html>
+<html>
+<!--
+   
+	Refactoring 5
+	Example code for ISFT151 for Educational Purposes
+	Prácticas Profesionalizantes III
+
+	Copyright 2022 mgsantiago <mgsantiago@protonmail.com>
+
+	This program is free software; you can redistribute it and/or modify
+	it under the terms of the GNU General Public License as published by
+	the Free Software Foundation; either version 2 of the License, or
+	(at your option) any later version.
+
+	This program is distributed in the hope that it will be useful,
+	but WITHOUT ANY WARRANTY; without even the implied warranty of
+	MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
+	GNU General Public License for more details.
+
+	You should have received a copy of the GNU General Public License
+	along with this program; if not, write to the Free Software
+	Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston,
+	MA 02110-1301, USA.
+
+
+-->
+<head>
+	<meta charset="utf-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<title>Sistema de Cta Cte</title>
+</head>
+
+<style>
+
+.submitButton
+{
+	width: 100%;
+	background-color: #4CAF50;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.deleteButton
+{
+	width: 100%;
+	background-color: #d35443;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.listButton
+{
+	width: 100%;
+	background-color: #435dd3;
+	color: white;
+	padding: 14px 20px;
+	margin: 8px 0;
+	border: none;
+	border-radius: 4px;
+	cursor: pointer;
+}
+
+.displayResult
+{
+	/*border-radius: 6px;*/
+	width: 100%;
+  	padding: 12px 20px;
+  	margin: 8px 0;
+  	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+.displayDebug
+{
+	/*border-radius: 6px;*/
+	width: 100%;
+  	padding: 12px 20px;
+  	margin: 8px 0;
+  	display: inline-block;
+	border: 1px solid #ccc;
+	border-radius: 4px;
+	box-sizing: border-box;
+}
+
+</style>
+
+<body>
+	
+</body>
+  
+<script type="text/javascript">
+
+class ClientModel
+{
+	constructor()
+	{
+
+	}
+
+	eliminarCliente()
+	{
+		let codigo = document.getElementById("codigocta");
+		
+	
+		let data = {
+			"codigo": codigo.value			
+    	}
+		
+		return fetch('./backend/DelClient.cgi', { method:'post', body: JSON.stringify(data) } ).then( response => response.text() );
+	}
+
+	listarClientes()
+	{
+		return fetch('./backend/ListClient.cgi', { method:'post' } ).then( response => response.text() );
+	}
+
+	guardarCliente()
+	{
+		let codigo = document.getElementById("codigocta");
+		let nombre = document.getElementById("nombre");
+		let nombrefantasia = document.getElementById("nombref");
+		let direccion = document.getElementById("direccion");
+		let mail = document.getElementById("mail");
+		let telefono = document.getElementById("telefono");
+	
+		let data = {
+			"codigo": codigo.value,
+			"nombre": nombre.value, 
+			"nombrefantasia": nombrefantasia.value ,
+			"direccion": direccion.value ,
+			"mail": mail.value ,
+			"telefono": telefono.value 
+    	}
+		
+		return fetch('./backend/AddClient.cgi', { method:'post', body: JSON.stringify(data) } ).then( response => response.text() );
+	}
+	
+}
+
+
+
+class ClientController
+{
+	constructor(view, model)
+	{
+		this.innerView = view;
+		this.innerModel = model;
+	}
+
+	onbuttonListarClick()
+	{   	
+		this.innerModel.listarClientes().then(response => this.innerView.displayDebug.value=response);
+	}	
+
+	onButtonGuardarClick()
+	{   	
+		this.innerModel.guardarCliente().then(response => this.innerView.displayDebug.value=response);
+	}
+
+	onbuttonEliminarClick()
+	{   	
+		this.innerModel.eliminarCliente().then(response => this.innerView.displayDebug.value=response);
+	}	
+}
+
+class ClientView extends HTMLElement
+{
+	constructor(model)
+	{
+		super();
+
+		//Acquire model reference
+		this.innerModel = model;
+		this.innerController = new ClientController(this,this.innerModel);
+
+		//Create UI Elements from HTMLDocument
+		this.displayCta = document.createElement('input');
+		this.displayCta.type = 'number';		
+		this.displayCta.setAttribute('placeholder','Codigo Cta..');
+		this.displayCta.setAttribute('required',true);
+		this.displayCta.setAttribute('id',"codigocta");
+		this.displayCta.value = '';
+		this.displayCta.classList.add('displayResult');		
+
+		this.displayNom = document.createElement('input');
+		this.displayNom.type = 'text';
+		this.displayNom.setAttribute('placeholder','Nombre..');
+		this.displayNom.setAttribute('id',"nombre");
+		this.displayNom.value = '';
+		this.displayNom.classList.add('displayResult');
+
+		this.displayNomF = document.createElement('input');
+		this.displayNomF.type = 'text';
+		this.displayNomF.setAttribute('placeholder','Nombre Fantasia..');
+		this.displayNomF.setAttribute('id',"nombref");
+		this.displayNomF.value = '';
+		this.displayNomF.classList.add('displayResult');
+
+		this.displayDir = document.createElement('input');
+		this.displayDir.type = 'text';
+		this.displayDir.setAttribute('placeholder','Dirección..');
+		this.displayDir.setAttribute('id',"direccion");
+		this.displayDir.value = '';
+		this.displayDir.classList.add('displayResult');
+
+		this.displayMail = document.createElement('input');
+		this.displayMail.type = 'text';
+		this.displayMail.setAttribute('placeholder','Mail..');
+		this.displayMail.setAttribute('id',"mail");
+		this.displayMail.value = '';
+		this.displayMail.classList.add('displayResult');
+
+		this.displayTel = document.createElement('input');
+		this.displayTel.type = 'text';
+		this.displayTel.setAttribute('placeholder','Teléfono..');
+		this.displayTel.setAttribute('id',"telefono");
+		this.displayTel.value = '';
+		this.displayTel.classList.add('displayResult');
+
+		this.buttonGuardar = document.createElement('button');
+		this.buttonGuardar.setAttribute('id',"btnguardar");
+		this.buttonGuardar.innerText = 'Guardar';
+		this.buttonGuardar.classList.add('submitButton');
+
+		this.buttonEliminar = document.createElement('button');
+		this.buttonEliminar.setAttribute('id',"btneliminar");
+		this.buttonEliminar.innerText = 'Eliminar';
+		this.buttonEliminar.classList.add('deleteButton');
+
+		this.buttonListar = document.createElement('button');
+		this.buttonListar.setAttribute('id',"btnlistar");
+		this.buttonListar.innerText = 'Listar';
+		this.buttonListar.classList.add('listButton');
+		
+		this.displayDebug = document.createElement('textarea');
+		this.displayDebug.value = '';
+		this.displayDebug.classList.add('displayResult');
+
+
+	}
+
+	connectedCallback()
+	{
+		//Append to itself
+		this.appendChild(this.displayCta);
+		this.appendChild(this.displayNom);
+		this.appendChild(this.displayNomF);
+		this.appendChild(this.displayDir);
+		this.appendChild(this.displayMail);
+		this.appendChild(this.displayTel);
+		this.appendChild(this.buttonGuardar);
+		this.appendChild(this.buttonEliminar);
+		this.appendChild(this.buttonListar);
+		this.appendChild(this.displayDebug);
+
+		//Attach event-handler functions to each element
+		this.buttonGuardar.addEventListener('click', (event) => this.innerController.onButtonGuardarClick(event) );
+		this.buttonEliminar.addEventListener('click', (event) => this.innerController.onbuttonEliminarClick(event) );
+		this.buttonListar.addEventListener('click', (event) => this.innerController.onbuttonListarClick(event) );
+				
+	}
+}
+
+function startGUIApplication()
+{
+	let myClientModel = new ClientModel();
+	let myClient = new ClientView(myClientModel);
+	document.body.appendChild(myClient);
+	
+}
+
+customElements.define('x-client-view', ClientView);
+
+window.addEventListener('load',startGUIApplication );
+
+
+
+
+
+</script>
+</html>
