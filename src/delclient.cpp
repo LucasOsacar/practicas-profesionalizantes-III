@@ -20,13 +20,14 @@ int main()
 	cin >> str;
 	ComponentFactoryPtr cF(new ComponentFactory());
 	IClientePtr cli = cF->create<ICliente>("Cliente");
-	cout << "Content-type:text/html\r\n\r\n";
-    cout << "------------------Clientes------------------" << endl;
-	cout << "-------Eliminando cliente------" << endl << endl;
+	cout << "Content-type:text/json\r\n\r\n";
 	string s = str["codigo"];
 	const int i {std::stoi(s)};
 	cli->Eliminar(i);
-	cout << "-----Cliente Cod:" << i << " Eliminado------" << endl << endl;	
+	json response;
+	string msg = "Cliente Eliminado";
+	response["result"] = msg;
+	cout << response.dump(0) << endl;
     //system("pause");
     return 0;
 }

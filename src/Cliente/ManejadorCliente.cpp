@@ -13,10 +13,10 @@ class ManejadorCliente : public IManejadorCliente
 public:
 	ManejadorCliente(void);
 	virtual ~ManejadorCliente(void);
-	void Guardar(ICliente* value);
+	int Guardar(ICliente* value);
 	void Obtener(int id, ICliente* cli);
 	std::list<CodigoCta> Listar(void);
-	void Eliminar(int id);
+	int Eliminar(int id);
 
 private:
 	MYSQL* conectar;
@@ -32,7 +32,7 @@ ManejadorCliente::~ManejadorCliente(void)
 {
 }
 
-void ManejadorCliente::Guardar(ICliente * value)
+int ManejadorCliente::Guardar(ICliente * value)
 {
 	//std::cout << "inicio Guardar" << std::endl;
 	int status;
@@ -44,6 +44,7 @@ void ManejadorCliente::Guardar(ICliente * value)
 		status = mysql_query(conectar, aux.c_str());
 	}
 	mysql_close(conectar);
+	return status;
 }
 
 void ManejadorCliente::Obtener(int id, ICliente* cli)
@@ -110,7 +111,7 @@ std::list<CodigoCta> ManejadorCliente::Listar(void)
 
 }
 
-void ManejadorCliente::Eliminar(int id)
+int ManejadorCliente::Eliminar(int id)
 {
 	int status;
 	conectar = mysql_init(0);
@@ -121,6 +122,7 @@ void ManejadorCliente::Eliminar(int id)
 		status = mysql_query(conectar, aux.c_str());
 	}
 	mysql_close(conectar);
+	return status;
 }
 
 extern "C" IManCliPtr create(std::string);

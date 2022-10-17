@@ -16,12 +16,12 @@ using namespace std;
 int main()
 {
 	json str = "";
-	cin >> str;
+	json response;
+	string msg = "";
+	cin >> str;	
 	ComponentFactoryPtr cF(new ComponentFactory());
 	IClientePtr cli = cF->create<ICliente>("Cliente");
-	cout << "Content-type:text/html\r\n\r\n";
-    cout << "------------------Clientes------------------" << endl;	
-	cout << "--------------Agregando cliente-------------" << endl << endl;
+	cout << "Content-type:text/json\r\n\r\n";
 	string s = str["codigo"];
 	const int i {std::stoi(s)};
 	cli->setCodigoCta(i);
@@ -30,8 +30,17 @@ int main()
 	cli->setDireccion(str["direccion"]);
 	cli->setMail(str["mail"]);
 	cli->setTelefono(str["telefono"]);
-	cli->Guardar();
-	cout << "-------Cliente Cod:" << i << " Agregado------" << endl<< endl;	
+	if (cli->Guardar())
+	{
+		msg = "Cliente Agregado";
+	}
+	else
+	{
+		msg = "Error al agregar el Cliente";
+	}	
+	response["result"] = msg;
+	cout << response.dump(0) << endl;
+	
     //system("pause");
     return 0;
 }

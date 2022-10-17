@@ -17,11 +17,11 @@ class cliente : public ICliente
 public:
 	cliente(void);
 	virtual ~cliente(void);
-	void Guardar(void);
+	int Guardar(void);
 	void Obtener(int id);
 	std::list<ICliente*> Listar(void);
-	void Modificar(void);
-	void Eliminar(int id);
+	int Modificar(void);
+	int Eliminar(int id);
 	bool Validar(void);
 
 	int getCodigoCta() { return codigocta; }
@@ -61,11 +61,11 @@ cliente::~cliente(void)
 	//delete mc;
 }
 
-void cliente::Guardar(void)
+int cliente::Guardar(void)
 {
 	ComponentFactoryPtr cF(new ComponentFactory());
 	mc = cF->create<IManejadorCliente>("ManejadorCliente");
-	mc->Guardar(this);
+	return mc->Guardar(this);
 }
 
 void cliente::Obtener(int id)
@@ -93,16 +93,16 @@ std::list<ICliente*> cliente::Listar(void)
 	return lst;
 }
 
-void cliente::Modificar(void)
+int cliente::Modificar(void)
 {
-	Guardar();
+	return Guardar();
 }
 
-void cliente::Eliminar(int id)
+int cliente::Eliminar(int id)
 {
 	ComponentFactoryPtr cF(new ComponentFactory());
 	mc = cF->create<IManejadorCliente>("ManejadorCliente");
-	mc->Eliminar(id);
+	return mc->Eliminar(id);
 }
 
 bool cliente::Validar(void)
