@@ -57,3 +57,49 @@
 	border-radius: 4px;
 	box-sizing: border-box;
 }
+
+
+.menuButton {
+    display: block;
+    text-decoration: none;
+    color: #fff;
+    font-family: sans-serif;
+    font-size: 14px;
+    background-color: #07AD87;
+    padding: 30px 30px;
+    border: 1px solid #038265;
+    border-radius: 3px;
+}
+.menuButton:hover {
+	background-color: #038265;
+}
+
+.styled-table { 
+	border-collapse: collapse; 
+	margin: 25px 0; 
+	font-size: 1em; 
+	font-family: sans-serif; 
+	min-width: 450px; 
+	box-shadow: 0 0 20px rgba(0, 0, 0, 0.15); 
+}
+
+.styled-table thead tr { 
+	color: #ffffff; 
+	text-align: middle; 
+}
+
+.styled-table th, .styled-table td { 
+	padding: 12px 15px; 
+}
+
+.styled-table tbody tr { 
+	border-bottom: 1px solid #dddddd; 
+} 
+
+.styled-table tbody tr:nth-of-type(even) { 
+	background-color: #f3f3f3; 
+} 
+
+.styled-table tbody tr:last-of-type { 
+	border-bottom: 2px solid #000000; 
+}

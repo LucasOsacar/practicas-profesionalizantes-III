@@ -14,12 +14,12 @@ class ClientModel
 			"codigo": codigo.value			
     	}
 		
-		return fetch('./backend/DelClient.cgi', { method:'post', body: JSON.stringify(data) } ).then( response => response.text() );
+		return fetch('./backend/DelClient.cgi', { method:'post', body: JSON.stringify(data) } ).then( response => response.json() );
 	}
 
 	listarClientes()
 	{
-		return fetch('./backend/ListClient.cgi', { method:'post' } ).then( response => response.text() );
+		return fetch('./backend/ListClient.cgi', { method:'post' } ).then( response => response.json() );
 	}
 
 	guardarCliente()
@@ -40,7 +40,7 @@ class ClientModel
 			"telefono": telefono.value 
     	}
 		
-		return fetch('./backend/AddClient.cgi', { method:'post', body: JSON.stringify(data) } ).then( response => response.text() );
+		return fetch('./backend/AddClient.cgi', { method:'post', body: JSON.stringify(data) } ).then( response => response.json());
 	}
 	
 }
