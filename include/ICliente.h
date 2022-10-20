@@ -5,11 +5,11 @@
 class ICliente
 {
 public:
-	virtual void Guardar(void)= 0;
+	virtual int Guardar(void)= 0;
 	virtual void Obtener(int id)= 0;
 	virtual std::list<ICliente*> Listar(void)= 0;
-	virtual void Modificar(void)= 0;
-	virtual void Eliminar(int id)= 0;
+	virtual int Modificar(void)= 0;
+	virtual int Eliminar(int id)= 0;
 	virtual bool Validar(void)= 0;
  
 	virtual int getCodigoCta() = 0;
