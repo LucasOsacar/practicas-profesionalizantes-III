@@ -66,6 +66,15 @@ class ClientView extends HTMLElement
 		this.buttonGuardar.setAttribute('id',"btnguardar");
 		this.buttonGuardar.innerText = 'Guardar';
 		this.buttonGuardar.classList.add('submitButton');
+
+		this.buttonBack = document.createElement('button');
+		this.buttonBack.setAttribute('id',"btnvolver");
+		this.buttonBack.innerText = 'Volver';
+		this.buttonBack.classList.add('listButton');
+
+		this.ContBack = document.createElement('div');
+        this.ContBack.classList.add('shadowbox');
+        this.ContBack.appendChild(this.buttonBack);
 		
         this.Cont1 = document.createElement('div');
 		this.Cont1.classList.add('shadowbox');
@@ -83,9 +92,16 @@ class ClientView extends HTMLElement
 		//Append to itself
         this.appendChild(this.ContTit);
 		this.appendChild(this.Cont1);
+		this.appendChild(this.ContBack);
 
 		//Attach event-handler functions to each element
-		this.buttonGuardar.addEventListener('click', (event) => this.innerController.onButtonGuardarClick(event) );				
+		this.buttonGuardar.addEventListener('click', (event) => this.innerController.onButtonGuardarClick(event) );		
+		this.buttonBack.addEventListener('click', (event) => this.OnButtonBackClick(event) );		
+	}
+
+	OnButtonBackClick()
+	{
+		location.href ="Main.html";
 	}
 }
 customElements.define('x-client-save', ClientView);

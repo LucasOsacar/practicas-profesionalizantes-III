@@ -37,16 +37,31 @@ class ClientView extends HTMLElement
 		this.tblBody = document.createElement("tbody");
 		this.displayList.appendChild(this.tblBody);
 
+		this.buttonBack = document.createElement('button');
+		this.buttonBack.setAttribute('id',"btnvolver");
+		this.buttonBack.innerText = 'Volver';
+		this.buttonBack.classList.add('listButton');
+
+		this.ContBack = document.createElement('div');
+        this.ContBack.classList.add('shadowbox');
+        this.ContBack.appendChild(this.buttonBack);
+
 	}
 
 	connectedCallback()
 	{
 		//Append to itself
 		this.appendChild(this.displayList);
+		this.appendChild(this.ContBack);
 
 		//Attach event-handler functions to each element
 		window.addEventListener('load' , (event) => this.innerController.onbuttonListarClick(event) );
-				
+		this.buttonBack.addEventListener('click', (event) => this.OnButtonBackClick(event) );		
+	}
+
+	OnButtonBackClick()
+	{
+		location.href ="Main.html";
 	}
 }
 customElements.define('x-client', ClientView);
