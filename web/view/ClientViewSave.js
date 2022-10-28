@@ -1,6 +1,6 @@
 import { ClientController } from "../controller/ClientController.js";
 
-class ClientView extends HTMLElement
+class ClientViewSave extends HTMLElement
 {
 	constructor(model)
 	{
@@ -104,6 +104,6 @@ class ClientView extends HTMLElement
 		location.href ="Main.html";
 	}
 }
-customElements.define('x-client-save', ClientView);
+customElements.define('x-client-save', ClientViewSave);
 
-export { ClientView };
+export { ClientViewSave };

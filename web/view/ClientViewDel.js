@@ -1,6 +1,6 @@
 import { ClientController } from "../controller/ClientController.js";
 
-class ClientView extends HTMLElement
+class ClientViewDel extends HTMLElement
 {
 	constructor(model)
 	{
@@ -65,7 +65,7 @@ class ClientView extends HTMLElement
 		this.appendChild(this.ContBack);
 
 		//Attach event-handler functions to each element
-		window.addEventListener('load' , (event) => this.innerController.OnLoadDelClient(event) );
+		this.innerController.OnLoadDelClient();
 		this.buttonBack.addEventListener('click', (event) => this.OnButtonBackClick(event) );		
 	}
 
@@ -74,6 +74,6 @@ class ClientView extends HTMLElement
 		location.href ="Main.html";
 	}
 }
-customElements.define('x-client', ClientView);
+customElements.define('x-client-del', ClientViewDel);
 
-export { ClientView };
+export { ClientViewDel };

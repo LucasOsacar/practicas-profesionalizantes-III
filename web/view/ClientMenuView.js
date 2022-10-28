@@ -53,25 +53,7 @@ class ClientMenuView extends HTMLElement
 			this.appendChild(this.Cont3);
 	
 			//Attach event-handler functions to each element
-			this.buttonGuardar.addEventListener('click', (event) =>  this.OnButtonGuardarClick(event));
-			this.buttonEliminar.addEventListener('click', (event) => this.OnButtonBorrarClick(event) );
-			this.buttonListar.addEventListener('click', (event) => this.OnButtonListarClick(event) );
 					
-		}
-
-		OnButtonGuardarClick()
-		{
-			location.href ="SaveClient.html";
-		}
-
-		OnButtonListarClick()
-		{
-			location.href ="ListClient.html";
-		}
-
-		OnButtonBorrarClick()
-		{
-			location.href ="DelClient.html";
 		}
 	
 }
