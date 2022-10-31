@@ -56,14 +56,8 @@ class ClientViewList extends HTMLElement
 
 		//Attach event-handler functions to each element
 		this.innerController.onbuttonListarClick();
-		//window.addEventListener('load' , (event) => this.innerController.onbuttonListarClick(event) );
-		this.buttonBack.addEventListener('click', (event) => this.OnButtonBackClick(event) );		
 	}
 
-	OnButtonBackClick()
-	{
-		location.href ="Main.html";
-	}
 }
 customElements.define('x-client-list', ClientViewList);
 

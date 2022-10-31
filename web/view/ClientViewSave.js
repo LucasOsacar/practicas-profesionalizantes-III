@@ -96,13 +96,9 @@ class ClientViewSave extends HTMLElement
 
 		//Attach event-handler functions to each element
 		this.buttonGuardar.addEventListener('click', (event) => this.innerController.onButtonGuardarClick(event) );		
-		this.buttonBack.addEventListener('click', (event) => this.OnButtonBackClick(event) );		
 	}
 
-	OnButtonBackClick()
-	{
-		location.href ="Main.html";
-	}
+	
 }
 customElements.define('x-client-save', ClientViewSave);
 

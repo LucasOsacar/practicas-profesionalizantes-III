@@ -15,6 +15,7 @@ class ActionsButtons
         document.body.removeChild(myClient);
         let myClientView = new ClientViewSave(myClientModel);
         document.body.appendChild(myClientView);
+        myClientView.buttonBack.addEventListener('click', (event) => this.OnButtonBackClick(event) );
     }
 
     OnButtonListarClick()
@@ -22,6 +23,7 @@ class ActionsButtons
         document.body.removeChild(myClient);
         let myClientView = new ClientViewList(myClientModel);
         document.body.appendChild(myClientView);
+        myClientView.buttonBack.addEventListener('click', (event) => this.OnButtonBackClick(event) );
     }
 
     OnButtonBorrarClick()
@@ -29,7 +31,13 @@ class ActionsButtons
         document.body.removeChild(myClient);
         let myClientView = new ClientViewDel(myClientModel);
         document.body.appendChild(myClientView);
+        myClientView.buttonBack.addEventListener('click', (event) => this.OnButtonBackClick(event) );
     }
+
+    OnButtonBackClick()
+	{
+		location.reload();
+	}
 }
 
 let ActionButtonObj = new ActionsButtons();

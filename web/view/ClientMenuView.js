@@ -6,8 +6,7 @@ class ClientMenuView extends HTMLElement
 	
 			//Acquire model reference
 			this.innerModel = model;
-			//this.innerController = new ClientController(this,this.innerModel);
-	
+			
 			//Create UI Elements from HTMLDocument	
 			this.Titulo = document.createElement('h2');
 			this.Titulo.innerText = 'Gestión de Clientes';
@@ -51,8 +50,6 @@ class ClientMenuView extends HTMLElement
 			this.appendChild(this.Cont1);
 			this.appendChild(this.Cont2);
 			this.appendChild(this.Cont3);
-	
-			//Attach event-handler functions to each element
 					
 		}
 	

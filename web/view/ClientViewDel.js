@@ -66,13 +66,9 @@ class ClientViewDel extends HTMLElement
 
 		//Attach event-handler functions to each element
 		this.innerController.OnLoadDelClient();
-		this.buttonBack.addEventListener('click', (event) => this.OnButtonBackClick(event) );		
 	}
 
-	OnButtonBackClick()
-	{
-		location.href ="Main.html";
-	}
+
 }
 customElements.define('x-client-del', ClientViewDel);
 
